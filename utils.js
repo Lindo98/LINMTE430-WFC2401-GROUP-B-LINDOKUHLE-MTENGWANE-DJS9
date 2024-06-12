@@ -13,8 +13,8 @@ function showReviewTotal(value, reviewer, isLoyalty) {
             makeMultiple(value) +
             " | last reviewed by " +
             reviewer +
-            a;
-    " " + iconDisplay;
+            " " +
+            iconDisplay;
 }
 exports.showReviewTotal = showReviewTotal;
 function populateUser(isReturning, userName) {

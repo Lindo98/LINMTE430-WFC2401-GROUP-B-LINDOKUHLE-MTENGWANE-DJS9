@@ -1,15 +1,13 @@
 {
-  "name": "linmte430-wfc2401-group-b-lindokuhle-mtengwane-djs9",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "tsc --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "name": "project",
   "devDependencies": {
-    "typescript": "^5.4.5"
+    "ts-loader": "*",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   }
 }

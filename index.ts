@@ -1,12 +1,12 @@
+import { LoyaltyUser, Permissions } from "./enums";
+import "./index.css";
+import { Property, Review } from "./interfaces";
 import {
-  showReviewTotal,
+  getTopTwoReviews,
   populateUser,
   showDetails,
-  getTopTwoReviews,
+  showReviewTotal,
 } from "./utils";
-import { Permissions, LoyaltyUser } from "./enums";
-import { Review, Property } from "./interfaces";
-import MainProperty from "./classes";
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -106,17 +106,20 @@ const properties: Property[] = [
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 
 populateUser(you.isReturning, you.firstName);
-
-// Add the properties
-for (let i = 0; i < properties.length; i++) {
-  const card = document.createElement("div");
-  card.classList.add("card");
-  card.innerHTML = properties[i].title;
-  const image = document.createElement("img");
-  image.setAttribute("src", properties[i].image);
-  card.appendChild(image);
-  showDetails(you.permissions, card, properties[i].price);
-  propertyContainer.appendChild(card);
+if (propertyContainer) {
+  // Add the properties
+  for (let i = 0; i < properties.length; i++) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = properties[i].title;
+    const image = document.createElement("img");
+    image.setAttribute("src", properties[i].image);
+    card.appendChild(image);
+    showDetails(you.permissions, card, properties[i].price);
+    propertyContainer.appendChild(card);
+  }
+} else {
+  console.log("No property container");
 }
 
 let count = 0;
@@ -144,6 +147,18 @@ footer.innerHTML =
   " " +
   currentLocation[2] +
   "°";
+
+// Classes
+class MainProperty {
+  src: string;
+  title: string;
+  reviews: Review[];
+  constructor(src: string, title: string, reviews: Review[]) {
+    this.src = src;
+    this.title = title;
+    this.reviews = reviews;
+  }
+}
 
 let yourMainProperty = new MainProperty(
   "images/italian-property.jpg",

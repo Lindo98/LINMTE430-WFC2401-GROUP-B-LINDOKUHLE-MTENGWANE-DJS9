@@ -16,8 +16,8 @@ export function showReviewTotal(
     makeMultiple(value) +
     " | last reviewed by " +
     reviewer +
-    a;
-  " " + iconDisplay;
+    " " +
+    iconDisplay;
 }
 
 export function populateUser(isReturning: boolean, userName: string) {

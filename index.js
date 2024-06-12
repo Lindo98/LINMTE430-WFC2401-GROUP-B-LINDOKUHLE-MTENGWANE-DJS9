@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("./utils");
 const enums_1 = require("./enums");
-const classes_1 = __importDefault(require("./classes"));
+require("./index.css");
+const utils_1 = require("./utils");
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -99,16 +96,21 @@ const properties = [
 // Functions
 (0, utils_1.showReviewTotal)(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 (0, utils_1.populateUser)(you.isReturning, you.firstName);
-// Add the properties
-for (let i = 0; i < properties.length; i++) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = properties[i].title;
-    const image = document.createElement("img");
-    image.setAttribute("src", properties[i].image);
-    card.appendChild(image);
-    (0, utils_1.showDetails)(you.permissions, card, properties[i].price);
-    propertyContainer.appendChild(card);
+if (propertyContainer) {
+    // Add the properties
+    for (let i = 0; i < properties.length; i++) {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = properties[i].title;
+        const image = document.createElement("img");
+        image.setAttribute("src", properties[i].image);
+        card.appendChild(image);
+        (0, utils_1.showDetails)(you.permissions, card, properties[i].price);
+        propertyContainer.appendChild(card);
+    }
+}
+else {
+    console.log("No property container");
 }
 let count = 0;
 function addReviews(array) {
@@ -133,7 +135,15 @@ footer.innerHTML =
         " " +
         currentLocation[2] +
         "°";
-let yourMainProperty = new classes_1.default("images/italian-property.jpg", "Italian House", [
+// Classes
+class MainProperty {
+    constructor(src, title, reviews) {
+        this.src = src;
+        this.title = title;
+        this.reviews = reviews;
+    }
+}
+let yourMainProperty = new MainProperty("images/italian-property.jpg", "Italian House", [
     {
         name: "Olive",
         stars: 5,
